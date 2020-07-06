@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{cabinet/core}">
+<th:block layout:fragment="style">
+    <!--    Dashboard    styles-->
+</th:block>
+
+<div layout:fragment="page_content">
+    <form th:action="@{/}"
+          th:object="${profileRequest}"
+          method="get">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <div class="card-title">
+                                Edit Profile
+                            </div>
+                            <p class="card-category">
+                                Complete your profile
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Surname
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               th:field="*{surname}"
+                                               id="surname"
+                                               name="surname"
+                                               autofocus>
+
+                                        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            First Name
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               th:field="*{name}"
+
+                                               id="name">
+
+                                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Bank Account Id
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               th:field="*{bankAccount}"
+                                               autofocus
+                                               id="bankAccount">
+
+                                        <span th:if="${#fields.hasErrors('bankAccount')}" th:errors="*{bankAccount}"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Balance
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               th:field="*{balance}"
+                                               readonly
+                                               id="balance">
+
+                                        <span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Birthday
+                                        </label>
+                                        <input type="date"
+                                               class="form-control"
+                                               th:field="*{birthDate}"
+                                               min="1970-01-01" max="2030-12-31"
+                                               id="birthday">
+
+                                        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"
+                                              class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Username
+                                        </label>
+                                        <input type="text"
+                                               class="form-control"
+                                               th:field="*{username}"
+                                               readonly
+                                               id="username">
+
+                                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                              class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">
+                                            Password
+                                        </label>
+                                        <input type="password"
+                                               class="form-control"
+                                               th:field="*{password}"
+                                               id="password">
+
+                                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                              class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${profileRequest.credits != null}">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header card-header-primary">
+                                            <h4 class="card-title"> Your Credits</h4>
+                                            <p class="card-category">Credit management</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                            </div>
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th>Credit Name</th>
+                                                    <th>Could not complete</th>
+                                                    <th>Due to</th>
+                                                    <th>limited time</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="credit:${profileRequest.credits}">
+                                                    <td th:text="${credit}"></td>
+                                                    <th><a href="#" class="btn btn-warning btn-sm">Add</a></th>
+                                                    <th><a href="#" class="btn btn-warning btn-sm">Edit</a></th>
+                                                    <th><a href="#" class="btn btn-warning btn-sm">Delete</a></th>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary pull-right">
+                            Back to home
+                        </button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</form>
+</div>
+<th:block layout:fragment="scripts">
+    <!--    scripts -->
+</th:block>
+</html>
