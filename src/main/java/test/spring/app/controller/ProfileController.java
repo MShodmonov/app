@@ -36,6 +36,6 @@ public class ProfileController {
     {
         ProfileRequest profileRequest = authService.getProfileRequest(user);
         model.addAttribute("profileRequest",profileRequest);
-        return "/cabinet/profile";
+        return "cabinet/profile";
     }
 }
