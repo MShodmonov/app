@@ -27,7 +27,7 @@ public class ProfileController {
     @GetMapping({"/","/index","/home"})
     public String getHomePage()
     {
-        return "/index";
+        return "index";
     }
     
     @GetMapping("/profile")
